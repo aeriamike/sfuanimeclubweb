@@ -7,10 +7,6 @@
 
 <div class="wrapper">
 
-
-
-
-
 <div class="index-image-container" style="width:90%;padding-left:150px;padding-top:50px;" >
   <div class="row">
   <div class="col-sm-8">
@@ -61,17 +57,12 @@
           </div>
           <div class="col-sm">
 
-
-
-
           </div>
           </div>
 
-          <h1> Pinned Post </h1>
+          <h1> Pinned Post</h1>
 
           </div>
-
-
 
           </div>
 
@@ -106,15 +97,8 @@ background: #73AD21;
 width: 160px;
 height: 50px; ">Summer Festival</p>
                     </div>
-
-
                   </div>
-
-
-
-
               </div>
-
 
     </div>
 
@@ -168,10 +152,7 @@ height: 50px; ">Summer Festival</p>
               "<h1 style='font-size:40px;padding-left:30px;color:white;'>"+d+"</h1>"
             +   "<h1 style='font-size:20px;padding-left:30px;color:white;'>"+y+"</h1>";
 
-
         </script>
-
-
         <p id="dayofweek"></p>
 
         <script>
@@ -216,7 +197,7 @@ height: 50px; ">Summer Festival</p>
 
     <div class="col-sm-6" style="padding-left:40px;">
 
-      <div class="mr-1" style="background-color:#646060;height:340px;margin-right:20px;">
+      <div class="mr-1" style="height:340px;margin-right:20px;">
         <h1 style="height:60px;">  Recent Post </h1>
         {% for p in indexid %}
                      <a href="{% url 'sfuanime:news_index' p.id %}"><h1 class="post-title">{{p.title}} {{p.datetime}}</h1></a>
@@ -254,60 +235,7 @@ height: 50px; ">Summer Festival</p>
 
 
 
-<!--
-<div class = "row">
 
-<div class ="col-sm">
-
-  <h1 style="font-size:40px;font-style:bold;"> News</h1>
-
-  {% for i in indexid %}
-
-               <a href="{% url 'sfuanime:news_index' i.id %}"><h1 class="post-title">{{i.title}}</h1></a>
-               <div class="news-body">{{i.datetime}}</div>
-
-
-         {% endfor %}
-
-
-
-</div>
-
-<div class ="col-sm">
-  <h1 style="font-size:40px;font-style:bold;padding-left:100px;"> Tweets </h1>
-
-<div class="tweer-feed" style="position:relative;left:100px;">
-  <a class="twitter-timeline" data-width="600" data-height="480" href="https://twitter.com/sfuanime" style="position:relative;left:30px;">Tweets by TwitterDev</a>
-</div>
-
-<h1 style="font-size:40px;font-style:bold;padding-left:100px;"> Video </h1>
-
-<iframe width="600" height="480"
-src="https://www.youtube.com/embed/2f8vp_pmWFE"
-style="position:relative;left:100px;">
-</iframe>
-
-</div>
-
-
-
-</div>
-
-
-
-<div class="row">
-
-  <div class ="col-sm">
-<div class="sponsor-container" style="width:90%;height:200px;">
-
-</div>
-<div class ="col-sm">
-
-</div>
-</div>
-</div>
-
--->
 
 {% endblock %}
 
