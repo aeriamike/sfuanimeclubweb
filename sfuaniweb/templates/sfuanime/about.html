@@ -21,9 +21,7 @@
   <h1 style="font-size:60px;font-style:bold;padding-left:400px;padding-top:50px;"> ABOUT </h1>
 </div>
 <div class = "col-sm-8" style="padding-left:520px;">
-  {% if not aboutpost %}
 
-  {% else %}
 
 <div class = "coming-soon" style="padding-left:400px;">
   <div class = "row" >
@@ -39,15 +37,6 @@
   </div>
 </div>
 
-  {% endif %}
-
-  {% for a in aboutpost %}
-
-               <a href="{% url 'sfuanime:news_index' p.id %}"><h1 class="post-title">{{a.title}}</h1></a>
-               <div class="news-body">{{a.body|safe}}</div>
-
-
-         {% endfor %}
 
 
   </div>

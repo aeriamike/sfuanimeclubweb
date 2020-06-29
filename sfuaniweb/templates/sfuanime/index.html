@@ -54,18 +54,17 @@
       <div class="row">
 
         <div class="col-sm" style="background-color:#F2ABE8;height:340px; padding:10px;">
-          <div class="row">
 
-          <div class="col-sm">
-
-
-          </div>
-          <div class="col-sm">
-
-          </div>
-          </div>
 
           <h1> Pinned Post</h1>
+
+          {% for p in indexid %}
+                       <a href="{% url 'sfuanime:news_index' p.id %}"><h1 class="post-title">{{p.title}} {{p.datetime}}</h1></a>
+
+
+                 {% endfor %}
+
+
 
           </div>
 
@@ -74,7 +73,7 @@
           <div class="row" style="padding-top:20px;">
 
 
-              <div class="col-sm" style="height:170px;background-color:#E9F37C;">
+              <div class="col-sm" style="height:260px;background-color:#E9F37C;">
                   <h1 > Popular Tags</h1>
 
 
@@ -177,13 +176,13 @@
 
     <div class="col-sm-6" style="padding-left:40px;">
 
-      <div class="mr-1" style="height:340px;margin-right:20px;">
-        <h1 style="height:60px;">  Recent Post </h1>
-        {% for p in indexid %}
-                     <a href="{% url 'sfuanime:news_index' p.id %}"><h1 class="post-title">{{p.title}} {{p.datetime}}</h1></a>
+      <div class="mr-1" style="margin-right:20px;width:820px;">
+          <h1 style="height:60px;">  Scroll </h1>
 
+      </div>
 
-               {% endfor %}
+      <div class="mr-1" style="height:280px;width:820px;margin-right:20px;background-color:#453E3E;">
+        
 
       </div>
 
@@ -192,7 +191,7 @@
     </div>
 
     <div class="col-sm">
-      <div class="tweer-feed" style="position:relative;left:10px;">
+      <div class="tweer-feed" style="">
         <a class="twitter-timeline" data-width="600" data-height="340" href="https://twitter.com/sfuanime" style="position:relative;left:30px;">Tweets by TwitterDev</a>
       </div>
       </div>
