@@ -11,9 +11,11 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 def index(request):
 
     indexid = news_post.objects.all()
+    scrid = screenings.objects.all()
+    scrid1 = scrid[0]
 
     length = len(news_post.objects.all())
-    return render(request, 'sfuanime/index.html',{"indexid":indexid})
+    return render(request, 'sfuanime/index.html',{"indexid":indexid,"scrid1":scrid1})
 #...
 def news(request):
 
@@ -64,5 +66,25 @@ def news_index(request, news_id):
     postid = news_post.objects.filter(id = news_id)
 
     length = len(news_post.objects.all())
-    print("postid")
+    print(postid)
     return render(request, 'sfuanime/news_detail.html',{"postid":postid})
+
+
+def news_tag(request,tag_id):
+    posts = news_post.objects.filter(tag = tag_id)
+    print("news")
+
+    user_list = User.objects.all()
+    page = request.GET.get('page', 5)
+
+    paginator = Paginator(posts, 10)
+    try:
+        users = paginator.page(page)
+    except PageNotAnInteger:
+        users = paginator.page(1)
+    except EmptyPage:
+        users = paginator.page(paginator.num_pages)
+
+
+
+    return render(request, 'sfuanime/news_tag.html', {"posts":posts,"users":users})

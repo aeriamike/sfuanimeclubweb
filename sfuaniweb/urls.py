@@ -10,5 +10,6 @@ urlpatterns = [
         path('membership/', views.membership, name='membership'),
         path('gallery/', views.galleria, name='galleria'),
         path('about/', views.abouts, name='abouts'),
-        path('news/<int:news_id>', views.news_index, name='news_index')
+        path('news/<int:news_id>', views.news_index, name='news_index'),
+        path('news/<str:tag_id>', views.news_tag, name='news_tag')
 ]
