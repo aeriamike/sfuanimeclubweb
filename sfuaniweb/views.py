@@ -12,10 +12,8 @@ def index(request):
 
     indexid = news_post.objects.all()
     scrid = screenings.objects.all()
-    scrid1 = scrid[0]
 
-    length = len(news_post.objects.all())
-    return render(request, 'sfuanime/index.html',{"indexid":indexid,"scrid1":scrid1})
+    return render(request, 'sfuanime/index.html',{"indexid":indexid,"scrid":scrid})
 #...
 def news(request):
 
@@ -25,7 +23,7 @@ def news(request):
     user_list = User.objects.all()
     page = request.GET.get('page', 5)
 
-    paginator = Paginator(posts, 10)
+    paginator = Paginator(posts, 1)
     try:
         users = paginator.page(page)
     except PageNotAnInteger:
@@ -54,6 +52,8 @@ def galleria(request):
 
 
     gall = gallery.objects.all()
+    print("gallery")
+    print(gall[0].title)
     return render(request, 'sfuanime/gallery.html', {"gall":gall})
 
 def abouts(request):

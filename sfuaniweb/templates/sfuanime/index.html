@@ -53,15 +53,15 @@
 
       <div class="row">
 
-        <div class="col-sm" style="background-color:#F2ABE8;height:340px; padding:10px;">
+        <div class="col-sm" style="height:340px; padding:10px;">
 
 
-          <h1> Pinned Post</h1>
+          <h1 style="padding-bottom:20px;"> Pinned Post</h1>
 
           {% for p in indexid %}
                        <a href="{% url 'sfuanime:news_index' p.id %}"><h1 class="post-title">{{p.title}} {{p.datetime}}</h1></a>
 
-
+                       <hr />
                  {% endfor %}
 
 
@@ -70,7 +70,7 @@
 
           </div>
 
-          <div class="row" style="padding-top:20px;">
+      <div class="row" style="padding-top:20px;">
 
 
               <div class="col-sm" style="height:260px;background-color:#E9F37C;">
@@ -78,12 +78,51 @@
 
                   {% for p in indexid %}
                                <a href="{% url 'sfuanime:news_tag' p.tag %}"><h1 class="post-title">{{p.tag}}</h1></a>
-
-
                          {% endfor %}
+              </div>
+
+              <div class="col-sm" style="height:260px;width:100%;">
+                <div class = "asd" style="height:260px;width:105%;background-color:#B9F37C;">
+                  <h1>Info</h1>
 
 
 
+                    <h1> Countdown to Fall 2020 Starts </h1>
+                    <h1 id="demo2"></h1>
+
+                  <script>
+                  // Set the date we're counting down to
+                  var countDownDate = new Date("Sep 8, 2020").getTime();
+
+                  // Update the count down every 1 second
+                  var x = setInterval(function() {
+
+                  // Get today's date and time
+                  var now = new Date().getTime();
+
+                  // Find the distance between now and the count down date
+                  var distance = countDownDate - now;
+
+                  // Time calculations for days, hours, minutes and seconds
+                  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                  // Display the result in the element with id="demo"
+                  document.getElementById("demo2").innerHTML = days + "d " + hours + "h "
+                  + minutes + "m " + seconds + "s ";
+
+                  // If the count down is finished, write some text
+                  if (distance < 0) {
+                  clearInterval(x);
+                  document.getElementById("demo2").innerHTML = "EXPIRED";
+                  }
+                  }, 1000);
+                  </script>
+
+
+                </div>
               </div>
 
     </div>
@@ -104,11 +143,12 @@
     <div class="" style="background-color:#D56363;height:200px;width:280px;">
 
 
-        <h2 id="date"><h2>
+        <h1 id="date"></h1>
+
         <script>
             n =  new Date();
             y = n.getFullYear();
-            m = n.getMonth() + 1;
+            m = n.getMonth();
             d = n.getDate();
 
             var mns = new Array(12);
@@ -183,80 +223,36 @@
 
     <div class="col-sm-6" style="padding-left:40px;">
 
-      <div class="mr-1" style="margin-right:20px;width:820px;">
-          <h1 style="height:60px;">  Scroll </h1>
 
-      </div>
-
-      <div class="mr-1" style="height:280px;width:820px;margin-right:20px;background-color:#453E3E;">
+      <div class="mr-1" style="height:340px;width:820px;margin-right:20px;background-color:#453E3E;">
 
 
         <div id="demo" class="carousel slide" data-ride="carousel">
 
+              <h1 style="height:60px;color:white;"> Screening Updates</h1>
+
+
+
   <!-- Indicators -->
-  <ul class="carousel-indicators">
-    <li data-target="#demo" data-slide-to="0" class="active"></li>
-    <li data-target="#demo" data-slide-to="1"></li>
-    <li data-target="#demo" data-slide-to="2"></li>
-  </ul>
+
 
   <!-- The slideshow -->
   <div class="carousel-inner">
-    <div class="carousel-item active" style="height:460px;">
+      {% for scr in scrid %}
 
+      {% if scr.id == 1 %}
+    <div class="carousel-item active" style="height:500px;padding:20px;">
+      {% else %}
+      <div class="carousel-item" style="height:500px;padding:20px;">
+      {% endif %}
 
-      <h1 class="post-title" style="color:white;">{{scrid1.title}}</h1>
-      <h1 class="post-title" style="color:white;">{{scrid1.body}}</h1>
+      <h1 class="post-title" style="color:white;">{{scr.title}}</h1>
+      <h1 class="post-title" style="color:white;">{{scr.body}}</h1>
 
-      <h1 class="post-title" style="color:white;">{{scrid1.datetime}}</h1>
-
-
-
-
-    </div>
-    <div class="carousel-item" style="height:460px;">
-      <h1 style="color:white;"> Countdown </h1>
-      <p id="demo2" style="color:white;"></p>
-
-
-
-
-<script>
-// Set the date we're counting down to
-var countDownDate = new Date("Jul 21, 2021 15:37:25").getTime();
-
-// Update the count down every 1 second
-var x = setInterval(function() {
-
-  // Get today's date and time
-  var now = new Date().getTime();
-
-  // Find the distance between now and the count down date
-  var distance = countDownDate - now;
-
-  // Time calculations for days, hours, minutes and seconds
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  // Display the result in the element with id="demo"
-  document.getElementById("demo2").innerHTML = days + "d " + hours + "h "
-  + minutes + "m " + seconds + "s ";
-
-  // If the count down is finished, write some text
-  if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("demo2").innerHTML = "EXPIRED";
-  }
-}, 1000);
-</script>
-
+      <h1 class="post-title" style="color:white;">{{scr.datetime}}</h1>
 
     </div>
-    <div class="carousel-item" style="height:460px;">
-    <h1 style="color:white;">adsakldad</h1>
-    </div>
+             {% endfor %}
   </div>
 
   <!-- Left and right controls -->

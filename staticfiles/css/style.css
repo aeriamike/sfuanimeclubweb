@@ -51,6 +51,7 @@ header{
   position:relative;
   top:30px;
   padding:20px;
+
 }
 
 
@@ -197,6 +198,9 @@ div.bxslider {
 }
 
 .gallery-section{
+  position:relative;
+  left:320px;
+  top:100px;
   width: 100%;
   padding: 60px 0;
   background: #f1f1f1;
