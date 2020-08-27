@@ -13,6 +13,8 @@ def index(request):
     indexid = news_post.objects.all()
     scrid = screenings.objects.all()
 
+    print(indexid[0].cover_image)
+
     return render(request, 'sfuanime/index.html',{"indexid":indexid,"scrid":scrid})
 #...
 def news(request):

@@ -6,7 +6,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 
 class news_post(models.Model):
     title = models.CharField(max_length=255, help_text="Title of blog posting")
-
+    cover_image = models.ImageField(upload_to='img/cover/', default='img/cover/logo.jpg')
     body = RichTextUploadingField(blank=True, null=True)
     datetime = models.DateField()
     tag = models.CharField(max_length=255, help_text="Topic of photo")
