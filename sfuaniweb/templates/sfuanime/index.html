@@ -7,151 +7,113 @@
 <!-- admin password: sfuanimeclub2020 -->
 <div class="wrapper">
 
+
 <div class="index-image-container" style="width:90%;padding-left:150px;padding-top:50px;" >
   <div class="row">
-  <div class="col-sm-8">
+  <div class="col-8">
+
 
 <!-- python manage.py findstatic -->
-    <div class="container">
-      <div id="myCarousel" class="carousel slide" data-ride="carousel" style="display:block;margin-left:auto;margin-right:auto;height:500px;overflow:hidden;">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+
+<div class="container">
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
 
 
-        </ol>
-
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-          <div class="item active">
-            <img src="{% static 'img/index-carosuel/mascot-1.jpg' %}"  style="width:200%;object-fit:cover;">
-
-          </div>
-
-          <div class="item">
-            <img src="{% static 'img/index-carosuel/discord.jpg' %}"  style="width:200%;object-fit:cover;">
-
-          </div>
-
-        </div>
-
-        <!-- Left and right controls -->
-        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-          <span class="glyphicon glyphicon-chevron-left"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
-
-        <p id="caption">datalist</p>
-
-        <script>
-        $('#myCarousel').on('slide.bs.carousel', function (e) {
-      if(!e.to){
-        //set body bgcolor
-         document.getElementById("caption").innerHTML = "sadasldas dksaj dkas dkas dasd";
-
-      }else{
-        //remove body bgcolor
-
-        document.getElementById("caption").innerHTML = "sadaw w ww w wsas dasd";
-
-      }
-    });
-
-    </script>
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" style="height:560px;overflow:hidden;">
 
 
 
-    </div>
+              {% for cid in cover %}
+
+
+                {% if cid.id == 1 %}
+              <div class="item active">
+                {% else %}
+                <div class="item">
+                {% endif %}
+
+
+              <a href="{% url 'sfuanime:news_index' cid.link %}">
+
+              <img src="{{ MEDIA_URL }} /media/{{cid.cover_image}}" alt="" style="width:200%;object-fit:cover;">
+
+              </a>
+              <div class="carousel-caption">
+
+                <h1 class="post-title">{{cid.body|safe}}</h1>
+
+              </div>
+              </div>
+              {% endfor %}
+
+
+
+
+  </div>
+  <div class="overlay-1">
+    <div class="text">Check our gallery!</div>
+  </div>
+
+  <!-- Left and right controls -->
+  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+</div>
 
   </div>
 
-  <div class="col-sm">
+  <div class="col" >
 
       <div class="row">
 
-        <div class="col-sm" style="height:340px; padding:10px;">
+        <div class="col" style="height:300px; padding:10px;">
 
+          <div class="row">
 
-          <h1 style="padding-bottom:20px;"> Pinned Post</h1>
+            <div class="col-3">
 
+          </div>
+
+          </div>
           {% for p in indexid %}
 
-            <div class="col-sm-2">
+            <div class="col-2">
             <img src="{{ MEDIA_URL }} /media/{{p.cover_image}}" alt="" width="80%" height="80%">
             </div>
 
-                    <div class="col-sm" >
-                       <a href="{% url 'sfuanime:news_index' p.id %}"><h1 class="post-title">{{p.title}} {{p.datetime}}</h1></a>
+                    <div class="col" >
+                       <a href="{% url 'sfuanime:news_index' p.id %}"><h1 class="post-title">{{p.title}}</h1></a>
+
+                      <h2 class="p-date">{{p.datetime}}</h2>
+
                       </div>
 
               <hr />
                  {% endfor %}
 
+          </div>
+          </div>
 
+          <div class="row" >
+          <div class="row">
 
           </div>
 
+          <div class="row">
+
+          <div  class="col" >
+            </div>
           </div>
 
-      <div class="row" style="padding-top:20px;">
-
-
-              <div class="col-sm" style="height:260px;background-color:#E9F37C;">
-                  <h1 > Popular Tags</h1>
-
-                  {% for p in indexid %}
-                               <a href="{% url 'sfuanime:news_tag' p.tag %}"><h1 class="post-title">{{p.tag}}</h1></a>
-                         {% endfor %}
-              </div>
-
-              <div class="col-sm" style="height:260px;width:100%;">
-                <div class = "asd" style="height:260px;width:105%;background-color:#B9F37C;">
-
-                  <h1> Countdown</h1>
-                  <h1 id="demo2"></h1>
-
-                <script>
-                // Set the date we're counting down to
-                var countDownDate = new Date("Sep 8, 2020").getTime();
-
-                // Update the count down every 1 second
-                var x = setInterval(function() {
-
-                // Get today's date and time
-                var now = new Date().getTime();
-
-                // Find the distance between now and the count down date
-                var distance = countDownDate - now;
-
-                // Time calculations for days, hours, minutes and seconds
-                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                // Display the result in the element with id="demo"
-                document.getElementById("demo2").innerHTML = days + "d " + hours + "h "
-                + minutes + "m " + seconds + "s ";
-
-                // If the count down is finished, write some text
-                if (distance < 0) {
-                clearInterval(x);
-                document.getElementById("demo2").innerHTML = "EXPIRED";
-                }
-                }, 1000);
-                </script>
-
-
-                </div>
-              </div>
-
-    </div>
-
+            </div>
 
 
   </div>
@@ -161,10 +123,10 @@
   <div class="row" style="padding-top:20px;">
 
 
-    <div class="col-sm-2 " style="padding-left:40px;">
+    <div class="col-2" style="padding-left:30px;">
     <div class = "row">
 
-    <div class="col-sm">
+    <div class="col">
     <div class="" style="background-color:#D56363;height:200px;width:280px;">
 
 
@@ -196,8 +158,8 @@
             var nd = dd.getDay();
 
             document.getElementById("date").innerHTML =
-             "<h1 style='font-size:70px;padding-left:10px;pdding-top:30px;color:white;'>"+d+"</h1>"
-            +   "<h1 style='font-size:20px;padding-left:10px;padding-top:10px;color:white;'>"+mnss+"</h1>";
+             "<h1 style='font-size:80px;color:white;position:relative;left:150px;top:50px;'>"+d+"</h1>"
+            +   "<h1 style='font-size:26px;color:white;position:relative;left:40px;bottom:30px;'>"+mnss+"</h1>";
 
             </script>
         <p id="dayofweek"></p>
@@ -216,7 +178,7 @@
 
           var n = weekday[d.getDay()];
           document.getElementById("dayofweek").innerHTML =
-           "<h1 style='font-size:20px;padding-left:10px;color:white;'>"+n+"</h1>";
+           "<h1 style='font-size:24px;padding-left:10px;color:white;position:relative;left:30px;bottom:30px;'>"+n+"</h1>";
 
            </script>
 
@@ -226,10 +188,10 @@
     </div>
     </div>
 
-    <div class="col-sm" style="padding-top:20px;">
+    <div class="col" style="padding-top:20px;">
     <div class="" style="background-color:#C297C4;height:120px;width:280px;overflow:hidden;">
 
-        <a class="weatherwidget-io" href="https://forecast7.com/en/49d28n123d12/vancouver/" data-label_1="VANCOUVER" data-label_2="WEATHER" data-theme="original" >VANCOUVER WEATHER</a>
+        <a class="weatherwidget-io" href="https://forecast7.com/en/49d28n123d12/vancouver/" data-label_1="VANCOUVER" data-theme="original" >VANCOUVER</a>
 
 <script>
 !function(d,s,id)
@@ -244,77 +206,330 @@
     </div>
     </div>
 
-    <div class="col-sm-6" style="padding-left:40px;">
+    <div class="col-6" style=padding-right:40px;">
+
+      <div class="row">
 
 
-      <div class="mr-1" style="height:340px;width:820px;margin-right:20px;background-color:#453E3E;">
+        <div class="col-4" style=padding-right:40px;">
+
+      <div style="width:240px;height:160px;position:relative;left:40px;background-color:#bdbfbf;overflow:hidden;" >
+
+        <div class="container" style="
+        background-color:#8fd9d9;overflow:hidden;
+        display: flex;justify-content: center;" >
 
 
-        <div id="demo" class="carousel slide" data-ride="carousel">
+        <div class="img-container" data-slideshow>
 
-              <h1 style="height:60px;color:white;"> Screening Updates</h1>
-  <!-- Indicators -->
-  <!-- The slideshow -->
-  <div class="carousel-inner">
-      {% for scr in scrid %}
+      {% for g in gall %}
+        <img src="{{ MEDIA_URL }} /media/img/index-gallery/{{g.title}}" alt="">
 
-      {% if scr.id == 1 %}
-    <div class="carousel-item active" style="height:500px;padding:20px;">
-      {% else %}
-      <div class="carousel-item" style="height:500px;padding:20px;">
-      {% endif %}
+      {% endfor %}
 
-      <div class="col-sm-4">
-      <img src="{{ MEDIA_URL }} /media/{{scr.hotel_Main_Img}}" alt="" width="70%" >
+    </div>
+    <div class="overlay-1">
+      <div class="text">Check our gallery!</div>
+    </div>
+
+          </div>
+
+
+
+        </div>
+        </div>
+
+        <div class="col-4" style=padding-right:40px;">
+
+        <div style="width:220px;height:160px;position:relative;
+        left:40px;background-color:#F7DEF7;" >
+
+
+
+
+          </div>
+          </div>
+
+          <div class="col-4" style=padding-right:40px;">
+
+          <div style="width:220px;height:200px;position:relative;left:20px;background-color:#8fd9d9;" >
+
+            <a class="twitter-timeline" height="100px"
+            href="https://twitter.com/sfuanime"
+            data-widget-id="Page ID"
+            data-chrome="nofooter noscrollbar noheader transparent">Tweets by @Test</a>
+
+            </div>
+            </div>
+
+
+
+          </div>
+
+
+          <div class="row">
+
+            <div class="col-8" style=padding-right:40px;padding-top:20px;">
+
+          <div style="width:480px;height:160px;position:relative;
+          bottom:40px;left:40px;background-color:#434546;" >
+            <h4><b>Screening</b></h4>
+
+            </div>
+            </div>
+
+
+            <div class="col-4" style=padding-right:40px;padding-top:20px;">
+
+            <div class="container" style="width:220px;height:120px;position:relative;left:20px;
+            background-color:#8fd9d9;overflow:hidden;
+            display: flex;justify-content: center;" >
+
+
+            <div class="img-container" data-slideshow-2>
+
+
+              <img src="{{ MEDIA_URL }} /media/img/mascot/1.jpg" alt="">
+              <img src="{{ MEDIA_URL }} /media/img/mascot/2.png" alt="">
+
+              <img src="{{ MEDIA_URL }} /media/img/mascot/3.jpg" alt="">
+
+              <img src="{{ MEDIA_URL }} /media/img/mascot/4.png" alt="">
+
+
+
+              </div>
+
+
+  <div class="overlay">
+    <div class="text">Meet the Mascot!</div>
+  </div>
+
+              </div>
+              </div>
+
+
+
+            </div>
+<!--
+
+-->
+
+</div>
+
+
+
+    <div class="col">
+
+
+      <div class="row">
+          <div class="col" style="height:200px;overflow:hidden;display: flex;justify-content: center;">
+
+            <div class="class-img" style="position:static;">
+            <img src="{{ MEDIA_URL }} /media/{{cd.cover_image}}" alt=""
+            style="height:200px;">
+            </div>
+
+
+            </div>
+            <div class="col" style="background-color:#f2c57c;position:relative;right:20px;">
+
+              <h4>Next Event</h4>
+
+              <div style="position:relative;top:20px;">
+              <h2 style="color:white;">{{ cd.title }}</h2>
+              <h1 style="color:white;" id="demo2"></h1>
+              </div>
+
+            <script>
+
+              // Set the date we're counting down to
+              var countDownDate = new Date("{{cd.datetime}}").getTime();
+
+
+              // Update the count down every 1 second
+              var x = setInterval(function() {
+
+              // Get today's date and time
+              var now = new Date().getTime();
+
+              // Find the distance between now and the count down date
+              var distance = countDownDate - now;
+
+              // Time calculations for days, hours, minutes and seconds
+              var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+              var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+              var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+              var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+              // Display the result in the element with id="demo"
+              document.getElementById("demo2").innerHTML = days + "d " + hours + "h "
+              + minutes + "m " + seconds + "s ";
+
+              // If the count down is finished, write some text
+              if (distance < 0) {
+              clearInterval(x);
+              document.getElementById("demo2").innerHTML = "EXPIRED";
+              }
+              }, 1000);
+              </script>
+
+              </div>
       </div>
 
-      <div class="col-sm">
-      <h1 class="post-title" style="color:white;">{{scr.title}}</h1>
-      <h1 class="post-title" style="color:white;">{{scr.body}}</h1>
-      <h1 class="post-title" style="color:white;">{{scr.datetime}}</h1>
+      <div class="row" style="padding-top:10px;">
+          <div class="col" style="height:100px;padding-top:10px;">
+            </div>
+
+
       </div>
 
     </div>
-             {% endfor %}
-  </div>
-
-  <!-- Left and right controls -->
-  <a class="carousel-control-prev" href="#demo" data-slide="prev">
-    <span class="carousel-control-prev-icon"></span>
-  </a>
-  <a class="carousel-control-next" href="#demo" data-slide="next">
-    <span class="carousel-control-next-icon"></span>
-  </a>
-</div>
-
-      </div>
-
-
-
-    </div>
-
-    <div class="col-sm">
-      <div class="tweer-feed" style="">
-        <a class="twitter-timeline" data-width="600" data-height="340" href="https://twitter.com/sfuanime" style="position:relative;left:30px;">Tweets by TwitterDev</a>
-      </div>
-      </div>
-
-  </div>
-
 
 </div>
 
 
-<div class="index-short" >
+</div>
+</div>
 
-<div class = "row">
-
-
-  </div>
+</div>
 
 
+          <script>
+class Slideshow {
+
+  constructor() {
+    this.initSlides();
+    this.initSlideshow();
+  }
+
+  // Set a `data-slide` index on each slide for easier slide control.
+  initSlides() {
+    this.container = $('[data-slideshow]');
+    this.slides = this.container.find('img');
+    this.slides.each((idx, slide) => $(slide).attr('data-slide', idx));
+  }
+
+  // Pseudo-preload images so the slideshow doesn't start before all the images
+  // are available.
+  initSlideshow() {
+    this.imagesLoaded = 0;
+    this.currentIndex = 0;
+    this.setNextSlide();
+    this.slides.each((idx, slide) => {
+      $('<img>').on('load', $.proxy(this.loadImage, this)).attr('src', $(slide).attr('src'));
+    });
+  }
+
+  // When one image has loaded, check to see if all images have loaded, and if
+  // so, start the slideshow.
+  loadImage() {
+    this.imagesLoaded++;
+    if (this.imagesLoaded >= this.slides.length) { this.playSlideshow() }
+  }
+
+  // Start the slideshow.
+  playSlideshow() {
+    this.slideshow = window.setInterval(() => { this.performSlide() }, 3500);
+  }
+
+  performSlide() {
+    if (this.prevSlide) { this.prevSlide.removeClass('prev fade-out') }
+
+    this.nextSlide.removeClass('next');
+    this.prevSlide = this.nextSlide;
+    this.prevSlide.addClass('prev');
+
+    this.currentIndex++;
+    if (this.currentIndex >= this.slides.length) { this.currentIndex = 0 }
+
+    this.setNextSlide();
+
+    this.prevSlide.addClass('fade-out');
+  }
+
+  setNextSlide() {
+    this.nextSlide = this.container.find(`[data-slide="${this.currentIndex}"]`).first();
+    this.nextSlide.addClass('next');
+  }
+
+}
+
+$(document).ready(function() {
+  new Slideshow;
+});
+
+</script>
 
 
+
+
+
+<script>
+class Slideshow2 {
+
+  constructor() {
+    this.initSlides();
+    this.initSlideshow();
+  }
+
+  // Set a `data-slide` index on each slide for easier slide control.
+  initSlides() {
+    this.container = $('[data-slideshow-2]');
+    this.slides = this.container.find('img');
+    this.slides.each((idx, slide) => $(slide).attr('data-slide', idx));
+  }
+
+  // Pseudo-preload images so the slideshow doesn't start before all the images
+  // are available.
+  initSlideshow() {
+    this.imagesLoaded = 0;
+    this.currentIndex = 0;
+    this.setNextSlide();
+    this.slides.each((idx, slide) => {
+      $('<img>').on('load', $.proxy(this.loadImage, this)).attr('src', $(slide).attr('src'));
+    });
+  }
+
+  // When one image has loaded, check to see if all images have loaded, and if
+  // so, start the slideshow.
+  loadImage() {
+    this.imagesLoaded++;
+    if (this.imagesLoaded >= this.slides.length) { this.playSlideshow() }
+  }
+
+  // Start the slideshow.
+  playSlideshow() {
+    this.slideshow = window.setInterval(() => { this.performSlide() }, 3500);
+  }
+
+  performSlide() {
+    if (this.prevSlide) { this.prevSlide.removeClass('prev fade-out') }
+
+    this.nextSlide.removeClass('next');
+    this.prevSlide = this.nextSlide;
+    this.prevSlide.addClass('prev');
+
+    this.currentIndex++;
+    if (this.currentIndex >= this.slides.length) { this.currentIndex = 0 }
+
+    this.setNextSlide();
+
+    this.prevSlide.addClass('fade-out');
+  }
+
+  setNextSlide() {
+    this.nextSlide = this.container.find(`[data-slide="${this.currentIndex}"]`).first();
+    this.nextSlide.addClass('next');
+  }
+
+}
+
+$(document).ready(function() {
+  new Slideshow2;
+});
+
+</script>
 
 {% endblock %}
 

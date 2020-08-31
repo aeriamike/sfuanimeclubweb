@@ -4,18 +4,23 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
-from .models import news_post,events,about,administration,gallery,screenings
+from .models import news_post,events,about,administration,gallery,screenings,index_cover,event_countdown
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def index(request):
 
-    indexid = news_post.objects.all()
+    indexid = news_post.objects.filter(pinned=True)
     scrid = screenings.objects.all()
+    cover = index_cover.objects.all()
+    cd = event_countdown.objects.latest('id')
+    gall = gallery.objects.all()
 
-    print(indexid[0].cover_image)
 
-    return render(request, 'sfuanime/index.html',{"indexid":indexid,"scrid":scrid})
+
+    return render(request, 'sfuanime/index.html',
+    {"indexid":indexid,"scrid":scrid,
+    "cover":cover,"cd":cd,"gall":gall})
 #...
 def news(request):
 
@@ -25,13 +30,15 @@ def news(request):
     user_list = User.objects.all()
     page = request.GET.get('page', 5)
 
-    paginator = Paginator(posts, 1)
+    paginator = Paginator(posts, 10)
     try:
         users = paginator.page(page)
     except PageNotAnInteger:
         users = paginator.page(1)
     except EmptyPage:
         users = paginator.page(paginator.num_pages)
+
+    print(request.get_full_path)
 
 
 
@@ -54,8 +61,6 @@ def galleria(request):
 
 
     gall = gallery.objects.all()
-    print("gallery")
-    print(gall[0].title)
     return render(request, 'sfuanime/gallery.html', {"gall":gall})
 
 def abouts(request):

@@ -55,9 +55,9 @@
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
 
-<div class = "header-container" style="">
+<div class = "container-fluid" style="">
 
-<div class = "row">
+<div class = "row" >
 
   <div class = "col-sm" style="padding-top:70px;">
     <div id="navigation">
@@ -144,7 +144,7 @@
 </div>
 
 
-<body >
+<body style="max-width:100%;margin:0 auto;">
 {% block content %}
 {% endblock %}
 
@@ -167,26 +167,7 @@
       <h4 style="position:relative;width:800px;padding-top:20px;padding-bottom:20px;padding-left:120px;">	&copy; 2020 Copyright: SFU Anime Club. All rights reserved</h4>
 </div>
 
-<style>
-@keyframes slideInFromLeft {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
 
-.header-container {
-  /* This section calls the slideInFromLeft animation we defined above */
-  animation: 1s ease-out 0s 1 slideInFromLeft;
-
-
-  padding: 30px;
-}
-
-
-</style>
 
 </script>
 </div>

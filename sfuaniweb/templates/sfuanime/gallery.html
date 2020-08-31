@@ -38,26 +38,29 @@
 -->
 
   <h1 style="font-size:46px;padding-left:400px;padding-top:40px;"><b> GALLERY</b> </h1>
-
+  <div align="center">
+      <button class="btn btn-default filter-button btn-lg" data-filter="all">All</button>
+      <button class="btn btn-default filter-button btn-lg" data-filter="Collab">Collab</button>
+      <button class="btn btn-default filter-button btn-lg" data-filter="Mascot">Mascot</button>
+        </div>
      <div class = "row" >
        <div class = "col-sm-8" >
 
          <div class="gallery-section">
-           <div class="inner-width">
-             <div class="gallery">
-
 
 
                {% for g in gall %}
-               <a href="/static/img/index-gallery/{{g.title}}.jpg "  class="image">
-                 <img src="/static/img/index-gallery/{{g.title}}.jpg " alt="">
+               <div class="gallery_product col-lg-3  filter {{g.tag}}">
+
+               <a href="{{ MEDIA_URL }} /media/img/index-gallery/{{g.title}}"  >
+                 <img src="{{ MEDIA_URL }} /media/img/index-gallery/{{g.title}}"
+                 class="img-responsive">
                </a>
+               </div>
 
                {% endfor %}
 
 
-             </div>
-           </div>
 
          </div>
      </div>
@@ -77,6 +80,40 @@
     }
   });
 </script>
+
+
+
+
+
+    <script>
+      $(document).ready(function(){
+
+    $(".filter-button").click(function(){
+        var value = $(this).attr('data-filter');
+
+        if(value == "all")
+        {
+            //$('.filter').removeClass('hidden');
+            $('.filter').show('1000');
+        }
+        else
+        {
+//            $('.filter[filter-item="'+value+'"]').removeClass('hidden');
+//            $(".filter").not('.filter[filter-item="'+value+'"]').addClass('hidden');
+            $(".filter").not('.'+value).hide('3000');
+            $('.filter').filter('.'+value).show('3000');
+
+        }
+    });
+
+    if ($(".filter-button").removeClass("active")) {
+$(this).removeClass("active");
+}
+$(this).addClass("active");
+
+});
+</script>
+</section>
 
 
 
