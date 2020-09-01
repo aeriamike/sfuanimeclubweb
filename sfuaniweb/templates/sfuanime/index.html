@@ -18,7 +18,20 @@
 <div class="container">
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
+  <ol class="carousel-indicators">
+    {% for cid in cover %}
 
+
+                    {% if cid.id == 0 %}
+                    <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+
+                    {% else %}
+                    <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+
+                    {% endif %}
+
+           {% endfor %}
+     </ol>
 
   <!-- Wrapper for slides -->
   <div class="carousel-inner" style="height:560px;overflow:hidden;">
@@ -42,7 +55,8 @@
               </a>
               <div class="carousel-caption">
 
-                <h1 class="post-title">{{cid.body|safe}}</h1>
+                <h3 >{{cid.body|safe}}</h3>
+                <p text-align="left">{{cid.body_alt|safe}}</p>
 
               </div>
               </div>
@@ -52,11 +66,9 @@
 
 
   </div>
-  <div class="overlay-1">
-    <div class="text">Check our gallery!</div>
-  </div>
 
-  <!-- Left and right controls -->
+<!--
+
   <a class="left carousel-control" href="#myCarousel" data-slide="prev">
     <span class="glyphicon glyphicon-chevron-left"></span>
     <span class="sr-only">Previous</span>
@@ -65,26 +77,20 @@
     <span class="glyphicon glyphicon-chevron-right"></span>
     <span class="sr-only">Next</span>
   </a>
+-->
 </div>
 </div>
 
   </div>
 
   <div class="col" >
-
+      <h3>FEATURED POSTS</h3>
       <div class="row">
-
         <div class="col" style="height:300px; padding:10px;">
 
-          <div class="row">
-
-            <div class="col-3">
-
-          </div>
-
-          </div>
           {% for p in indexid %}
 
+          <div class="row">
             <div class="col-2">
             <img src="{{ MEDIA_URL }} /media/{{p.cover_image}}" alt="" width="80%" height="80%">
             </div>
@@ -92,11 +98,12 @@
                     <div class="col" >
                        <a href="{% url 'sfuanime:news_index' p.id %}"><h1 class="post-title">{{p.title}}</h1></a>
 
-                      <h2 class="p-date">{{p.datetime}}</h2>
+                      <h5 class="p-date">{{p.datetime}} - {{p.author}}</h5>
 
                       </div>
 
               <hr />
+              </div>
                  {% endfor %}
 
           </div>
@@ -213,7 +220,7 @@
 
         <div class="col-4" style=padding-right:40px;">
 
-      <div style="width:240px;height:160px;position:relative;left:40px;background-color:#bdbfbf;overflow:hidden;" >
+      <div style="width:240px;height:160px;position:relative;left:40px;overflow:hidden;" >
 
         <div class="container" style="
         background-color:#8fd9d9;overflow:hidden;
@@ -223,15 +230,18 @@
         <div class="img-container" data-slideshow>
 
       {% for g in gall %}
+
         <img src="{{ MEDIA_URL }} /media/img/index-gallery/{{g.title}}" alt="">
 
       {% endfor %}
 
     </div>
+  <a href="{% url 'sfuanime:galleria' %}">
     <div class="overlay-1">
+
       <div class="text">Check our gallery!</div>
     </div>
-
+  </a>
           </div>
 
 
@@ -242,7 +252,21 @@
         <div class="col-4" style=padding-right:40px;">
 
         <div style="width:220px;height:160px;position:relative;
-        left:40px;background-color:#F7DEF7;" >
+        left:40px;bottom:50px;background-color:#F7DEF7;" >
+
+        <div class="clock">
+  <div class="outer-clock-face">
+    <div class="marking marking-one"></div>
+    <div class="marking marking-two"></div>
+    <div class="marking marking-three"></div>
+    <div class="marking marking-four"></div>
+    <div class="inner-clock-face">
+      <div class="hand hour-hand"></div>
+      <div class="hand min-hand"></div>
+      <div class="hand second-hand"></div>
+    </div>
+  </div>
+</div>
 
 
 
@@ -267,19 +291,46 @@
           </div>
 
 
-          <div class="row">
+          <div class="row" id="screening">
 
             <div class="col-8" style=padding-right:40px;padding-top:20px;">
 
+
           <div style="width:480px;height:160px;position:relative;
-          bottom:40px;left:40px;background-color:#434546;" >
-            <h4><b>Screening</b></h4>
+          bottom:50px;left:40px;background-color:#8BD665;overflow:hidden;" >
+
+          <div class="row">
+            <div class="col-6" style="
+            height:160px;width:150px;position:relative;left:16px;">
+
+            <div style="position:relative;top:30px;">
+            <h3 style="position:relative;color:white;">SCREENING UPDATE</h3>
+            <h6 style="color:white;"> {{scrid.body|safe}}</h6>
+            </div>
+              </div>
+
+              <div class="col-6" style="width:100px;overflow:hidden;">
+
+
+                <img src="{{ MEDIA_URL }} /media/{{scrid.hotel_Main_Img}}"
+                alt=""
+                style='height: 100%; width: 100%; object-fit: contain;
+                display: flex;
+                flex-wrap: wrap-reverse;
+                justify-content: center;'>
+
+
+                </div>
+            </div>
+
+
+
+          </div>
 
             </div>
-            </div>
 
 
-            <div class="col-4" style=padding-right:40px;padding-top:20px;">
+            <div class="col-4" style=padding-right:40px;padding-top:10px;">
 
             <div class="container" style="width:220px;height:120px;position:relative;left:20px;
             background-color:#8fd9d9;overflow:hidden;
@@ -300,11 +351,13 @@
 
               </div>
 
-
+    <a href="{% url 'sfuanime:galleria' %}">
   <div class="overlay">
-    <div class="text">Meet the Mascot!</div>
-  </div>
 
+    <div class="text">Meet the Mascot!</div>
+
+  </div>
+  </a>
               </div>
               </div>
 
@@ -334,9 +387,8 @@
             </div>
             <div class="col" style="background-color:#f2c57c;position:relative;right:20px;">
 
-              <h4>Next Event</h4>
-
-              <div style="position:relative;top:20px;">
+                <div style="position:relative;top:40px;">
+              <h2 style="color:white">Next Event</h2>
               <h2 style="color:white;">{{ cd.title }}</h2>
               <h1 style="color:white;" id="demo2"></h1>
               </div>
@@ -379,7 +431,20 @@
 
       <div class="row" style="padding-top:10px;">
           <div class="col" style="height:100px;padding-top:10px;">
+            <h3>PARTNERSHIP</h3>
+
+                          <img src="{{ MEDIA_URL }} /media/img/sponsor/sakuramedia.jpg" alt="" style="width:16%;">
+                          <img src="{{ MEDIA_URL }} /media/img/sponsor/gawon.jpg" alt="" style="width:16%;">
+
+                          <img src="{{ MEDIA_URL }} /media/img/sponsor/bubbleworld.jpg" alt="" style="width:16%;">
+                          <img src="{{ MEDIA_URL }} /media/img/sponsor/sakuramedia.jpg" alt="" style="width:16%;">
+                          <img src="{{ MEDIA_URL }} /media/img/sponsor/gawon.jpg" alt="" style="width:16%;">
+
+                          <img src="{{ MEDIA_URL }} /media/img/sponsor/bubbleworld.jpg" alt="" style="width:16%;">
+
+
             </div>
+
 
 
       </div>
@@ -530,6 +595,33 @@ $(document).ready(function() {
 });
 
 </script>
+
+
+<script>
+  const secondHand = document.querySelector('.second-hand');
+const minsHand = document.querySelector('.min-hand');
+const hourHand = document.querySelector('.hour-hand');
+
+function setDate() {
+  const now = new Date();
+
+  const seconds = now.getSeconds();
+  const secondsDegrees = ((seconds / 60) * 360) + 90;
+  secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+
+  const mins = now.getMinutes();
+  const minsDegrees = ((mins / 60) * 360) + ((seconds/60)*6) + 90;
+  minsHand.style.transform = `rotate(${minsDegrees}deg)`;
+
+  const hour = now.getHours();
+  const hourDegrees = ((hour / 12) * 360) + ((mins/60)*30) + 90;
+  hourHand.style.transform = `rotate(${hourDegrees}deg)`;
+}
+
+setInterval(setDate, 1000);
+
+setDate();
+  </script>
 
 {% endblock %}
 

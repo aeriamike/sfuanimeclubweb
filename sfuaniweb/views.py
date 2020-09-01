@@ -10,17 +10,19 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def index(request):
 
-    indexid = news_post.objects.filter(pinned=True)
-    scrid = screenings.objects.all()
+    indexid = news_post.objects.filter(pinned=True).order_by('-datetime')
+    scrid = screenings.objects.all().last()
     cover = index_cover.objects.all()
     cd = event_countdown.objects.latest('id')
     gall = gallery.objects.all()
+
+    scr_all = screenings.objects.order_by('-datetime')
 
 
 
     return render(request, 'sfuanime/index.html',
     {"indexid":indexid,"scrid":scrid,
-    "cover":cover,"cd":cd,"gall":gall})
+    "cover":cover,"cd":cd,"gall":gall,"scr_all":scr_all})
 #...
 def news(request):
 

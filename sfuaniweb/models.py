@@ -9,6 +9,8 @@ class news_post(models.Model):
     cover_image = models.ImageField(upload_to='img/cover/', default='img/cover/logo.jpg')
     body = RichTextUploadingField(blank=True, null=True)
     datetime = models.DateField()
+    body_alt = models.CharField(max_length=255, help_text="Title of blog posting",null=True)
+
     pinned = models.BooleanField(default=False,blank=True,null=False)
     author = models.CharField(max_length=255, help_text="Author", default="SFU Exec Team")
     tag = models.CharField(max_length=255, help_text="Topic of photo")
@@ -18,6 +20,7 @@ class index_cover(models.Model):
     cover_image = models.ImageField(upload_to='img/cover/', default='img/cover/logo.jpg')
     body = RichTextUploadingField(blank=True, null=True)
     link = models.CharField(max_length=255, help_text="Id number that links to the webpage")
+    body_alt = models.CharField(max_length=255, help_text="Title of blog posting",null=True)
 
 class events(models.Model):
     title = models.CharField(max_length=255, help_text="Title of blog posting")
