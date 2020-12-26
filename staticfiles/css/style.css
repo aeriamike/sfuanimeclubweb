@@ -7,37 +7,19 @@ header{
 
 .header-container{
   width:100%;
-  background-color: White;
-  height:200px;
+
 
 }
 
 .footer-container{
-
-
+  margin: 0 auto;
 }
-
-
-
 
 
 .footer-copyright{
-     width: 800px;
-     padding-top:100px;
-
-
-     margin: 0 auto;
-
-
+  margin: 0 auto;
 }
 
-.header-container {
-  /* This section calls the slideInFromLeft animation we defined above */
-  animation: 1s ease-out 0s 1 slideInFromLeft;
-
-
-  padding: 30px;
-}
 
 
 .header-logo-pic{
@@ -561,4 +543,14 @@ div.bxslider {
 }
 .images .left:hover + .right {
   width:0;
+}
+
+
+/* modal */
+.thumbnail {margin-bottom:6px;}
+
+.carousel-control.left,.carousel-control.right{
+  background-image:none;
+  margin-top:40%;
+  width:100%;
 }

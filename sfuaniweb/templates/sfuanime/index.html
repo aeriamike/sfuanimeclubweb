@@ -8,7 +8,7 @@
 <div class="wrapper">
 
 
-<div class="index-image-container" style="width:90%;padding-left:150px;padding-top:50px;" >
+<div class="index-image-container" style="width:100%;height:100%;padding-top:25px;" >
   <div class="row">
   <div class="col-8">
 
@@ -35,39 +35,25 @@
 
   <!-- Wrapper for slides -->
   <div class="carousel-inner" style="height:560px;overflow:hidden;">
-
-
-
               {% for cid in cover %}
-
-
                 {% if cid.id == 1 %}
               <div class="item active">
                 {% else %}
                 <div class="item">
                 {% endif %}
-
-
               <a href="{% url 'sfuanime:news_index' cid.link %}">
-
               <img src="{{ MEDIA_URL }} /media/{{cid.cover_image}}" alt="" style="width:200%;object-fit:cover;">
-
               </a>
               <div class="carousel-caption">
-
                 <h3 >{{cid.body|safe}}</h3>
-                <p text-align="left">{{cid.body_alt|safe}}</p>
 
               </div>
               </div>
               {% endfor %}
 
-
-
-
   </div>
 
-<!--
+
 
   <a class="left carousel-control" href="#myCarousel" data-slide="prev">
     <span class="glyphicon glyphicon-chevron-left"></span>
@@ -77,377 +63,301 @@
     <span class="glyphicon glyphicon-chevron-right"></span>
     <span class="sr-only">Next</span>
   </a>
--->
+
 </div>
 </div>
 
   </div>
 
-  <div class="col" >
-      <h3>FEATURED POSTS</h3>
-      <div class="row">
-        <div class="col" style="height:300px; padding:10px;">
 
-          {% for p in indexid %}
+<div class = "col">
+<div class = "row">
 
-          <div class="row">
-            <div class="col-2">
-            <img src="{{ MEDIA_URL }} /media/{{p.cover_image}}" alt="" width="80%" height="80%">
-            </div>
+  <div class="col-offset-2">
 
-                    <div class="col" >
-                       <a href="{% url 'sfuanime:news_index' p.id %}"><h1 class="post-title">{{p.title}}</h1></a>
 
-                      <h5 class="p-date">{{p.datetime}} - {{p.author}}</h5>
+  <div class="" style="background-color:#D56363;height:180px;width:200px;">
 
-                      </div>
 
-              <hr />
+      <h1 id="date"></h1>
+
+      <script>
+          n =  new Date();
+          y = n.getFullYear();
+          m = n.getMonth();
+          d = n.getDate();
+
+          var mns = new Array(12);
+          mns[0] = "Jan";
+          mns[1] = "Feb";
+          mns[2] = "Mar";
+          mns[3] = "Apr";
+          mns[4] = "May";
+          mns[5] = "Jun";
+          mns[6] = "Jul";
+          mns[7] = "Aug";
+          mns[8] = "Sept";
+          mns[9] = "Oct";
+          mns[10] = "Nov";
+          mns[11] = "Dec";
+
+          var mnss = mns[m];
+
+          var dd = new Date();
+          var nd = dd.getDay();
+
+          document.getElementById("date").innerHTML =
+           "<h1 style='font-size:70px;color:white;position:relative;left:90px;top:50px;'>"+d+"</h1>"
+          +   "<h1 style='font-size:26px;color:white;position:relative;left:30px;bottom:30px;'>"+mnss+"</h1>";
+
+          </script>
+      <p id="dayofweek"></p>
+
+      <script>
+
+        var d = new Date();
+        var weekday = new Array(7);
+        weekday[0] = "Sun";
+        weekday[1] = "Mon";
+        weekday[2] = "Tue";
+        weekday[3] = "Wed";
+        weekday[4] = "Thu";
+        weekday[5] = "Fri";
+        weekday[6] = "Sat";
+
+        var n = weekday[d.getDay()];
+        document.getElementById("dayofweek").innerHTML =
+         "<h1 style='font-size:24px;color:white;position:relative;left:30px;bottom:30px;'>"+n+"</h1>";
+
+         </script>
+  </div>
+
+
+  </div>
+
+  <!------------------>
+
+</div>
+
+
+<div class = "row" style="padding-top:20px;height:260px;">
+
+  <div class="col" style="">
+
+    <h2 style="font-weight: bold;padding-bottom:15px;">FEATURED POSTS</h2>
+    {% for p in indexid %}
+
+                  <div class="col" style="position:relative;right:15px;" >
+                     <a href="{% url 'sfuanime:news_index' p.id %}"><h1 class="post-title">{{p.title}}</h1></a>
+                    <h5 class="p-date">{{p.datetime}} - {{p.author}}</h5>
+                    <hr>
+                    </div>
+
+        {% endfor %}
+
+
+
+    </div>
+  </div>
+
+</div>
+
+
+
+</div>
+
+</div>
+
+<!------------------>
+
+<div class="row" style="height:300px;padding-top:25px;padding-left:20px;">
+  <div class="col-4">
+
+
+  <h1 style="font-weight: bold;">Latest Posts</h1>
+  {% for l in latest_post %}
+  <div class = "row" style="padding-bottom:20px;position:relative;right:20px;top:20px;">
+
+
+        <div class="col-4" style=" width:100px;
+    height:100px;
+    text-align:center;
+    overflow:hidden;">
+              <img src="{{ MEDIA_URL }} /media/{{l.cover_image}}" alt="" style=" min-width:100px;
+  max-width:none;
+  height:100px;
+  margin:0 -100%;">
               </div>
-                 {% endfor %}
+              <div class="col">
 
-          </div>
-          </div>
+                <div class="col" style="position:relative;right:15px;" >
+                   <a href="{% url 'sfuanime:news_index' l.id %}"><h1 class="post-title">{{l.title}}</h1></a>
+                  <h5 class="p-date">{{l.datetime}} - {{l.author}}</h5>
+                  <p>{{ l.body|safe|truncatechars:"40" }}</p>
 
-          <div class="row" >
-          <div class="row">
+                  <hr>
+                  </div>
 
-          </div>
 
-          <div class="row">
-
-          <div  class="col" >
-            </div>
-          </div>
-
-            </div>
+      </div>
+</div>
+  {% endfor %}
 
 
   </div>
+
+
+  <div class="col-3" >
+    <h1 style="font-weight: bold;">Screening Update</h1>
+
+    <div class = "row">
+      <div class= "scr_pic" style=" height:200px;position: relative; padding-top:20px; overflow: hidden;">
+    <img src="{{ MEDIA_URL }} /media/{{scrid.hotel_Main_Img}}" >
 </div>
 
+  <div class="row">
+    <div class="scr_text" style="padding-top:20px;padding-left:10px;">
+    <a href=""><h2 class="post-title">{{scrid.title}}</h2></a>
+    <h4>{{scrid.time_location}}</h4>
+    <h4 > {{scrid.body|safe}}</h4>
+    </div>
 
-  <div class="row" style="padding-top:20px;">
+        </div>
 
+        </div>
+</div>
+<div class = "col">
+<div class = "row">
+  <div class = "col-offset-2">
+  <div style="width:300px;height:180px;position:relative;left:20px;overflow:hidden;" >
 
-    <div class="col-2" style="padding-left:30px;">
-    <div class = "row">
-
-    <div class="col">
-    <div class="" style="background-color:#D56363;height:200px;width:280px;">
-
-
-        <h1 id="date"></h1>
-
-        <script>
-            n =  new Date();
-            y = n.getFullYear();
-            m = n.getMonth();
-            d = n.getDate();
-
-            var mns = new Array(12);
-            mns[0] = "January";
-            mns[1] = "February";
-            mns[2] = "March";
-            mns[3] = "April";
-            mns[4] = "May";
-            mns[5] = "June";
-            mns[6] = "July";
-            mns[7] = "August";
-            mns[8] = "September";
-            mns[9] = "October";
-            mns[10] = "November";
-            mns[11] = "December";
-
-            var mnss = mns[m];
-
-            var dd = new Date();
-            var nd = dd.getDay();
-
-            document.getElementById("date").innerHTML =
-             "<h1 style='font-size:80px;color:white;position:relative;left:150px;top:50px;'>"+d+"</h1>"
-            +   "<h1 style='font-size:26px;color:white;position:relative;left:40px;bottom:30px;'>"+mnss+"</h1>";
-
-            </script>
-        <p id="dayofweek"></p>
-
-        <script>
-
-          var d = new Date();
-          var weekday = new Array(7);
-          weekday[0] = "Sunday";
-          weekday[1] = "Monday";
-          weekday[2] = "Tuesday";
-          weekday[3] = "Wednesday";
-          weekday[4] = "Thursday";
-          weekday[5] = "Friday";
-          weekday[6] = "Saturday";
-
-          var n = weekday[d.getDay()];
-          document.getElementById("dayofweek").innerHTML =
-           "<h1 style='font-size:24px;padding-left:10px;color:white;position:relative;left:30px;bottom:30px;'>"+n+"</h1>";
-
-           </script>
+    <div class="container" style="
+    background-color:#8fd9d9;overflow:hidden;
+    display: flex;justify-content: center;" >
 
 
+    <div class="img-container" data-slideshow>
+
+  {% for g in gall %}
+
+    <img src="{{ MEDIA_URL }} /media/img/index-gallery/{{g.title}}" alt="">
+
+  {% endfor %}
+
+  </div>
+  <a href="{% url 'sfuanime:galleria' %}">
+  <div class="overlay-1">
+
+  <div class="text">Check our gallery!</div>
+  </div>
+  </a>
+      </div>
 
 
     </div>
-    </div>
-
-    <div class="col" style="padding-top:20px;">
-    <div class="" style="background-color:#C297C4;height:120px;width:280px;overflow:hidden;">
-
-        <a class="weatherwidget-io" href="https://forecast7.com/en/49d28n123d12/vancouver/" data-label_1="VANCOUVER" data-theme="original" >VANCOUVER</a>
-
-<script>
-!function(d,s,id)
-{var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);
-  js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
-</script>
-
-    </div>
-    </div>
-
-
-    </div>
-    </div>
-
-    <div class="col-6" style=padding-right:40px;">
-
-      <div class="row">
-
-
-        <div class="col-4" style=padding-right:40px;">
-
-      <div style="width:240px;height:160px;position:relative;left:40px;overflow:hidden;" >
-
-        <div class="container" style="
-        background-color:#8fd9d9;overflow:hidden;
+</div>
+  <div class = "col-offset-2">
+        <div class="container" style="width:300px;height:180px;position:relative;
+      background-color:#8fd9d9;overflow:hidden;
         display: flex;justify-content: center;" >
 
 
-        <div class="img-container" data-slideshow>
+        <div class="img-container" data-slideshow-2>
 
-      {% for g in gall %}
+          {% for gm in gall_mascot %}
 
-        <img src="{{ MEDIA_URL }} /media/img/index-gallery/{{g.title}}" alt="">
+            <img src="{{ MEDIA_URL }} /media/img/index-gallery/{{gm.title}}" alt="">
 
-      {% endfor %}
+          {% endfor %}
 
-    </div>
+
+          </div>
+
   <a href="{% url 'sfuanime:galleria' %}">
-    <div class="overlay-1">
-
-      <div class="text">Check our gallery!</div>
-    </div>
-  </a>
-          </div>
-
-
-
-        </div>
-        </div>
-
-        <div class="col-4" style=padding-right:40px;">
-
-        <div style="width:220px;height:160px;position:relative;
-        left:40px;bottom:50px;background-color:#F7DEF7;" >
-
-        <div class="clock">
-  <div class="outer-clock-face">
-    <div class="marking marking-one"></div>
-    <div class="marking marking-two"></div>
-    <div class="marking marking-three"></div>
-    <div class="marking marking-four"></div>
-    <div class="inner-clock-face">
-      <div class="hand hour-hand"></div>
-      <div class="hand min-hand"></div>
-      <div class="hand second-hand"></div>
-    </div>
-  </div>
-</div>
-
-
-
-
-          </div>
-          </div>
-
-          <div class="col-4" style=padding-right:40px;">
-
-          <div style="width:220px;height:200px;position:relative;left:20px;background-color:#8fd9d9;" >
-
-            <a class="twitter-timeline" height="100px"
-            href="https://twitter.com/sfuanime"
-            data-widget-id="Page ID"
-            data-chrome="nofooter noscrollbar noheader transparent">Tweets by @Test</a>
-
-            </div>
-            </div>
-
-
-
-          </div>
-
-
-          <div class="row" id="screening">
-
-            <div class="col-8" style=padding-right:40px;padding-top:20px;">
-
-
-          <div style="width:480px;height:160px;position:relative;
-          bottom:50px;left:40px;background-color:#8BD665;overflow:hidden;" >
-
-          <div class="row">
-            <div class="col-6" style="
-            height:160px;width:150px;position:relative;left:16px;">
-
-            <div style="position:relative;top:30px;">
-            <h3 style="position:relative;color:white;">SCREENING UPDATE</h3>
-            <h6 style="color:white;"> {{scrid.body|safe}}</h6>
-            </div>
-              </div>
-
-              <div class="col-6" style="width:100px;overflow:hidden;">
-
-
-                <img src="{{ MEDIA_URL }} /media/{{scrid.hotel_Main_Img}}"
-                alt=""
-                style='height: 100%; width: 100%; object-fit: contain;
-                display: flex;
-                flex-wrap: wrap-reverse;
-                justify-content: center;'>
-
-
-                </div>
-            </div>
-
-
-
-          </div>
-
-            </div>
-
-
-            <div class="col-4" style=padding-right:40px;padding-top:10px;">
-
-            <div class="container" style="width:220px;height:120px;position:relative;left:20px;
-            background-color:#8fd9d9;overflow:hidden;
-            display: flex;justify-content: center;" >
-
-
-            <div class="img-container" data-slideshow-2>
-
-
-              <img src="{{ MEDIA_URL }} /media/img/mascot/1.jpg" alt="">
-              <img src="{{ MEDIA_URL }} /media/img/mascot/2.png" alt="">
-
-              <img src="{{ MEDIA_URL }} /media/img/mascot/3.jpg" alt="">
-
-              <img src="{{ MEDIA_URL }} /media/img/mascot/4.png" alt="">
-
-
-
-              </div>
-
-    <a href="{% url 'sfuanime:galleria' %}">
   <div class="overlay">
 
-    <div class="text">Meet the Mascot!</div>
+  <div class="text">Check the mascot art!</div>
 
   </div>
   </a>
-              </div>
-              </div>
-
-
-
-            </div>
-<!--
-
--->
+          </div>
 
 </div>
 
 
+  </div>
+  <div class = "row">
 
-    <div class="col">
-
-
-      <div class="row">
-          <div class="col" style="height:200px;overflow:hidden;display: flex;justify-content: center;">
-
-            <div class="class-img" style="position:static;">
-            <img src="{{ MEDIA_URL }} /media/{{cd.cover_image}}" alt=""
-            style="height:200px;">
-            </div>
+    <div class="col" >
+      <div class="event-countdown" style="height:160px;width:560px;padding-top:20px;position:relative;left:20px;">
 
 
-            </div>
-            <div class="col" style="background-color:#f2c57c;position:relative;right:20px;">
 
-                <div style="position:relative;top:40px;">
-              <h2 style="color:white">Next Event</h2>
-              <h2 style="color:white;">{{ cd.title }}</h2>
-              <h1 style="color:white;" id="demo2"></h1>
+        <div class="row">
+            <div class="col" style="
+            overflow:hidden;display: flex;justify-content: center;">
+
+              <div class="class-img" style="position:static;">
+              <img src="{{ MEDIA_URL }} /media/{{cd.cover_image}}" alt=""
+              style="height:200px;">
               </div>
 
-            <script>
-
-              // Set the date we're counting down to
-              var countDownDate = new Date("{{cd.datetime}}").getTime();
-
-
-              // Update the count down every 1 second
-              var x = setInterval(function() {
-
-              // Get today's date and time
-              var now = new Date().getTime();
-
-              // Find the distance between now and the count down date
-              var distance = countDownDate - now;
-
-              // Time calculations for days, hours, minutes and seconds
-              var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-              var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-              var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-              var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-              // Display the result in the element with id="demo"
-              document.getElementById("demo2").innerHTML = days + "d " + hours + "h "
-              + minutes + "m " + seconds + "s ";
-
-              // If the count down is finished, write some text
-              if (distance < 0) {
-              clearInterval(x);
-              document.getElementById("demo2").innerHTML = "EXPIRED";
-              }
-              }, 1000);
-              </script>
 
               </div>
+              <div class="col" style="background-color:#f2c57c;">
+
+        <div style="position:relative;top:40px;">
+      <h2 style="color:white">Next Event</h2>
+      <h2 style="color:white;">{{ cd.title }}</h2>
+      <h1 style="color:white;" id="demo2"></h1>
       </div>
 
-      <div class="row" style="padding-top:10px;">
-          <div class="col" style="height:100px;padding-top:10px;">
-            <h3>PARTNERSHIP</h3>
+    <script>
 
-                          <img src="{{ MEDIA_URL }} /media/img/sponsor/sakuramedia.jpg" alt="" style="width:16%;">
-                          <img src="{{ MEDIA_URL }} /media/img/sponsor/gawon.jpg" alt="" style="width:16%;">
-
-                          <img src="{{ MEDIA_URL }} /media/img/sponsor/bubbleworld.jpg" alt="" style="width:16%;">
-                          <img src="{{ MEDIA_URL }} /media/img/sponsor/sakuramedia.jpg" alt="" style="width:16%;">
-                          <img src="{{ MEDIA_URL }} /media/img/sponsor/gawon.jpg" alt="" style="width:16%;">
-
-                          <img src="{{ MEDIA_URL }} /media/img/sponsor/bubbleworld.jpg" alt="" style="width:16%;">
+      // Set the date we're counting down to
+      var countDownDate = new Date("{{cd.datetime}}").getTime();
 
 
-            </div>
+      // Update the count down every 1 second
+      var x = setInterval(function() {
+
+      // Get today's date and time
+      var now = new Date().getTime();
+
+      // Find the distance between now and the count down date
+      var distance = countDownDate - now;
+
+      // Time calculations for days, hours, minutes and seconds
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      // Display the result in the element with id="demo"
+      document.getElementById("demo2").innerHTML = days + "d " + hours + "h "
+      + minutes + "m " + seconds + "s ";
+
+      // If the count down is finished, write some text
+      if (distance < 0) {
+      clearInterval(x);
+      document.getElementById("demo2").innerHTML = "EXPIRED";
+      }
+      }, 1000);
+      </script>
+
+        </div>
+
+    </div>
 
 
 
-      </div>
+    </div>
+
+    </div>
+
+
+
+
 
     </div>
 
@@ -455,9 +365,10 @@
 
 
 </div>
-</div>
 
 </div>
+</div>
+
 
 
           <script>
@@ -597,31 +508,6 @@ $(document).ready(function() {
 </script>
 
 
-<script>
-  const secondHand = document.querySelector('.second-hand');
-const minsHand = document.querySelector('.min-hand');
-const hourHand = document.querySelector('.hour-hand');
-
-function setDate() {
-  const now = new Date();
-
-  const seconds = now.getSeconds();
-  const secondsDegrees = ((seconds / 60) * 360) + 90;
-  secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
-
-  const mins = now.getMinutes();
-  const minsDegrees = ((mins / 60) * 360) + ((seconds/60)*6) + 90;
-  minsHand.style.transform = `rotate(${minsDegrees}deg)`;
-
-  const hour = now.getHours();
-  const hourDegrees = ((hour / 12) * 360) + ((mins/60)*30) + 90;
-  hourHand.style.transform = `rotate(${hourDegrees}deg)`;
-}
-
-setInterval(setDate, 1000);
-
-setDate();
-  </script>
 
 {% endblock %}
 

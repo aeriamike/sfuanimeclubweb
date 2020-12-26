@@ -15,18 +15,20 @@ def index(request):
     cover = index_cover.objects.all()
     cd = event_countdown.objects.latest('id')
     gall = gallery.objects.all()
+    gall_mascot = gallery.objects.filter(tag="Mascot").order_by('-datetime')
 
     scr_all = screenings.objects.order_by('-datetime')
 
-
-
+    latest_post = news_post.objects.order_by('-datetime')[:2]
+    print(latest_post)
     return render(request, 'sfuanime/index.html',
     {"indexid":indexid,"scrid":scrid,
-    "cover":cover,"cd":cd,"gall":gall,"scr_all":scr_all})
+    "cover":cover,"cd":cd,"gall":gall,"gall_mascot":gall_mascot,
+    "scr_all":scr_all,"latest_post":latest_post})
 #...
 def news(request):
 
-    posts = news_post.objects.all()
+    posts = news_post.objects.all().order_by('-datetime')
     print("news")
 
     user_list = User.objects.all()
